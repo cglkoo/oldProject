@@ -1,0 +1,12 @@
+MyBatis入门步骤：
+1,新建maven项目；
+2,引入依赖包配置pom.xml;
+3,新建mybatis核心配置文件：mybatis-config.xml，主要是数据源的配置； 
+4,新建具体的数据库表的映射配置文件：BookMapper.xml，该映射文件需要配置在上面的核心配置文件中；
+	<mappers>
+		<mapper resource="BookMapper.xml" />
+	</mappers>
+5,新建数据表：Book (bId,bName,bAuthor,bPublisher)
+6,新建实体类：Book int bId,String nName,String bAuthor,String bPublisher;
+7,测试CRUD；
+

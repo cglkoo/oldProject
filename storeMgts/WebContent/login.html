@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>系统登录首页</title>
+<script type="text/javascript" src="wejs/jquery-1.8.3.min.js"></script>
+<script type="text/javascript">
+/*去除字符串前后的空格*/
+function trimSpace(str) {
+	return str.replace(/(^\s+)|(\s+$)/g, "");
+}
+$(document).ready(function(){
+		 $("#regForm").submit(function(){
+		    	$("span").css("color","red").css("font-size","14px").css("font-weight","bold");
+		    	var n=$("input[name='fname']").val();
+		    	n = trimSpace(n);
+		    	var v=$("input[name='pwd']").val();
+		    	v = trimSpace(v);
+		    	if(n==''){
+		    		 $("input[name='fname']").focus();
+		    		 $("span").text("用户名不能为空");
+		    		 $("input[name='fname']").css("border","1px dashed red");
+			    	 $("input[name='fname']").blur(function(){
+		    			  $("span").text("");
+		    		  });
+			    	   return false;
+		    	}else if(v==''){
+				      $("input[name='pwd']").focus(); 
+					  $("span").text("密码不能为空");
+					  $("input[name='pwd']").css("border","1px dashed red");
+					  $("input[name='pwd']").blur(function(){
+							$("span").text("");
+					  });
+					return false;
+		          }else{
+		        	  return true;
+		          }
+		     });
+});
+</script>
+<style type="text/css">
+.bgdiv{
+	height:100%;
+	padding: 100px;
+	line-height: 35px;
+}
+h1{
+	color:#FF751A;
+}
+</style>
+</head>
+<body>
+<div align="center" class="bgdiv">
+	<h1>手机门店管理系统</h1><span></span>
+	<form id="regForm" action="main.jsp" method="post">
+	<table>
+		<tr><td>用户名：</td>
+		   <td><input name="fname" type="text"/></td>
+	   </tr>
+	   <tr><td>密&nbsp;&nbsp;&nbsp;码：</td>
+		   <td><input name="pwd" type="password" /></td>
+	   </tr>
+	   <tr><td></td>
+		   <td><input type="submit" value="登录" >&nbsp;<input type="reset" value="重置"></td>
+		</tr>
+	</table>
+	</form>
+</div>
+</body>
+</html>

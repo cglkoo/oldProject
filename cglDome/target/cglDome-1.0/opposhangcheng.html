@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>商城</title>
+<script type="text/javascript" src="myjs/jquery-3.2.1.min.js" ></script>
+<script type="text/javascript">
+
+
+function lunbo(imgs) {
+	document.getElementById("aimg").src = "imgs/" + imgs + ".jpg";  //img/1.jpg
+	document.getElementById("aimg").name = 0;   //一个重要的标志：鼠标移上来的时候；
+	changeBGcolor(imgs);
+}
+
+function start() {
+
+	var b = document.getElementById("aimg").name;
+
+	if (b == 1) {     					//鼠标移开的时候，自由轮播；
+		document.getElementById("aimg").src = "imgs/1.jpg";
+		document.getElementById("aimg").name = 2;
+		
+	} else if (b == 2) {
+		document.getElementById("aimg").src = "imgs/2.jpg";
+		document.getElementById("aimg").name = 1;
+	} 
+	changeBGcolor(b);
+}
+
+function changeBGcolor(n){
+	if(n==1){
+		document.getElementById('d1').style.backgroundColor = 'white';
+		document.getElementById('d2').style.backgroundColor = '#666';
+	}else if(n==2){
+		document.getElementById('d2').style.backgroundColor = 'white';
+		document.getElementById('d1').style.backgroundColor = '#666';
+	}
+	
+}
+function time() {
+
+	var run = setInterval("start()", 3000);   //一秒调用一次，轮播一次图片；
+
+}
+function r(imgs) {
+
+	document.getElementById("aimg").name = imgs;
+	
+	document.getElementById(imgs).style.backgroundColor = 'white';
+
+}
+
+//购物结算部分
+$(function($){
+
+    //商品变色
+    $("#myTableProduct").find("tr").mouseover(function(){
+        $(this).css("backgroundColor","#fff");
+    }).mouseout(function(){
+        if($("#myTableProduct").find("tr").index($(this))%2==1) {//判断是否奇数行
+            $(this).css("backgroundColor","#F7FCFF");
+        }
+    });
+    //计算总价
+    function totalPrice(){
+        var percents= 0,prePrices= 0,prices=0;//积分，原价，现价
+        $("#myTableProduct").find("tr").each(function(i,ele){
+            var num=$(ele).find(".shopping_product_list_5").find("input").val();//数量
+            percents+=parseInt($(ele).find(".shopping_product_list_2").text())*num;
+            //解决下js中浮点数的bug问题，因此建议浮点数的运算不要放在前台，这里是指粗略的解决了一下
+            var price=parseInt($(ele).find(".shopping_product_list_4").find("label").text().replace(".",""))*num;
+            prices+=price;
+            var prePrice=parseInt($(ele).find(".shopping_product_list_3").find("label").text().replace(".",""))*num;
+            prePrices+=prePrice;
+        });
+        $("#product_integral").text(percents);
+        $("#product_total").text(prices/100);
+        $("#product_save").text((prePrices-prices)/100);
+        return prices/100;
+    }
+    totalPrice();
+    //删除商品
+    $("#myTableProduct").find(".shopping_product_list_6").children("a").click(function(){
+        if(confirm("您确定要删除商品么？")){
+            $(this).parent().parent().remove();
+            totalPrice();
+        }
+    });
+    //修改数量
+    $("#myTableProduct").find(".shopping_product_list_5").children("input").change(function(){
+        var value=$(this).val();
+        if((value == "")||!(/^[0-9]*[1-9][0-9]*$/.test(value))){
+            alert("数量不能为空，且只能为正整数");
+            $(this).val(1);
+        }
+        var t =totalPrice();
+        alert("修改成功！，您的商品总金额是"+t+"元")
+    });
+    //清空购物车
+    $("#removeAllProduct").click(function(){
+        //注意清除的先后顺序
+        $("#myTableProduct").next().remove();
+        $("#myTableProduct").remove();
+        $(".shopping_list_border").append("<div class='empty_product'><div>您还没有挑选商品，<a href='index.html'>去挑选看看>></a></div></div>");
+
+    });
+})
+</script>
+<style type="text/css">
+.top{
+    width:100%;
+    height:50px;
+    background-color: #009B72;
+}
+.logo{
+    width:100%;
+    height:65px;
+}
+.logo img{
+    vertical-align: middle;
+    margin-left:100px;
+    //line-height: 78px;
+}
+.logo span{
+    color:#009B72;
+    font-size: 30px;
+    //background-color: pink;
+    vertical-align: middle;
+    font-weight: bolder;
+}
+
+#aimg{
+    width:100%;
+    height:440px;
+}
+#d1{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    border:2px solid #2AAD6F;
+    background-color: white; 
+}
+#d2{
+    width:12px;
+    height:12px;
+    border-radius:50%;
+    border:2px solid #2AAD6F;
+    background-color: white; 
+    margin-left:20px;
+}
+
+/*购物结算部分*/
+.shopping_list_top{
+    clear:both;
+    font-size:14px;
+    font-weight:bold;
+    margin-top:20px;
+}
+.shopping_list_border{
+    border:solid 2px #666;
+}
+.shopping_list_title{
+    background-color:#eee;
+    height:25px;
+}
+.shopping_list_title li{
+    float:left;
+    line-height:28px;
+}
+.shopping_list_title_1{
+    width:420px;
+    padding-left:30px;
+    text-align:left;
+}
+.shopping_list_title_2{
+    width:120px;
+    text-align:center;
+}
+.shopping_list_title_3{
+    width:120px;
+    text-align:center;
+}
+.shopping_list_title_4{
+    width:120px;
+    text-align:center;
+}
+.shopping_list_title_5{
+    width:70px;
+    text-align:center;
+}
+.shopping_list_title_6{
+    width:70px;
+    text-align:center;
+}
+.shopping_product_list{
+    height:35px;
+
+}
+.shopping_product_list input{
+    width:30px;
+    height:15px;
+    border:solid 1px #666;
+    text-align:center;
+}
+.shopping_product_list td{
+    line-height:35px;
+    border-bottom:dashed 1px #CCC;
+}
+.shopping_product_list_1{
+    width:420px;
+    padding-left:30px;
+    text-align:left;
+}
+.shopping_product_list_2{
+    width:120px;
+    text-align:center;
+    
+}
+.shopping_product_list_3{
+    width:120px;
+    text-align:center;
+    color:#464646;
+}
+.shopping_product_list_4{
+    width:120px;
+    text-align:center;
+    color:#191919;
+}
+.shopping_product_list_5{
+    width:70px;
+    text-align:center;
+}
+.shopping_product_list_6{
+    width:70px;
+    text-align:center;
+}
+.shopping_list_end{
+    background-color:#eee;
+    height:70px;
+}
+.shopping_list_end li{
+    float:right;
+}
+.shopping_list_end_1{
+    margin:5px 10px 0px 10px;
+}
+.shopping_list_end_2{
+    font-weight:bold;
+    color:#BD3E00;
+    font-size:14px;
+    margin:5px 10px 0px 0px;
+}
+.shopping_list_end_3{
+    font-weight:bold;
+    font-size:14px;
+    margin:5px 0px 0px 15px;
+}
+.shopping_list_end_4{
+    border-right:solid 1px #666666;
+    margin:10px 0px 0px 15px;
+    padding-right:10px;
+}
+.shopping_list_end_yellow{
+    color:#BD3E00;
+}
+</style>
+</head>
+<body onload="time()">
+<div class="top"></div>
+<div class="logo">
+    <img alt="" src="jpg/logo.png">
+    <span>商城</span>
+</div>
+<div>
+    <form name="aform">
+		<table align="center">
+			<tr>
+				<td><img id="aimg" src="imgs/1.jpg" name="1" /></td>
+			</tr>
+		</table>
+		<table align="center">
+			<tr>
+			    <td><div id="d1"  value="1" onMouseMove="lunbo(1)" onmouseout="r(1)"></div></td>
+			    <td><div id="d2"  value="2" onMouseMove="lunbo(1)" onmouseout="r(1)"></div></td>
+			</tr>
+		</table>
+	</form>
+</div>
+
+<div class="shopping_list_top">请选择您要购买的商品</div>
+<div class="shopping_list_border">
+    <table style="width:100%;" border="0" cellspacing="0" cellpadding="0">
+        <tr class="shopping_list_title">
+            <td class="shopping_list_title_1">商品名</td>
+            <td class="shopping_list_title_2">单品积分</td>
+            <td class="shopping_list_title_4">价格</td>
+            <td class="shopping_list_title_5">数量</td>
+            <td class="shopping_list_title_6">删除</td>
+        </tr>
+    </table>
+    <table style="width:100%;" border="0" cellspacing="0" cellpadding="0" id="myTableProduct">
+        <tr class="shopping_product_list" id="shoppingProduct_01">
+            <td class="shopping_product_list_1">oppoFind9</td>
+            <td class="shopping_product_list_2"><label>399</label></td>
+            <td class="shopping_product_list_4">￥<label>3999.00 </label></td>
+            <td class="shopping_product_list_5"><input type="text" value="1"></td>
+            <td class="shopping_product_list_6"><a style="color:#009B72">删除</a></td>
+        </tr>
+        <tr class="shopping_product_list" id="shoppingProduct_02">
+            <td class="shopping_product_list_1"> oppoR9sPlus</td>
+            <td class="shopping_product_list_2"><label>349</label></td>
+            <td class="shopping_product_list_4">￥<label>3499.00</label></td>
+            <td class="shopping_product_list_5"><input type="text" value="1"></td>
+            <td class="shopping_product_list_6"><a style="color:#009B72">删除</a></td>
+        </tr>
+        <tr class="shopping_product_list" id="shoppingProduct_03">
+            <td class="shopping_product_list_1">oppoR9s</td>
+            <td class="shopping_product_list_2"><label>249</label></td>
+            <td class="shopping_product_list_4">￥<label>2499.00</label> </td>
+            <td class="shopping_product_list_5"><input type="text" value="2"></td>
+            <td class="shopping_product_list_6"><a style="color:#009B72">删除</a></td>
+        </tr>
+        <tr class="shopping_product_list" id="shoppingProduct_04">
+            <td class="shopping_product_list_1">oppoR9Plus</td>
+            <td class="shopping_product_list_2"><label>358</label></td>
+            <td class="shopping_product_list_4">￥<label>2799.00</label></td>
+            <td class="shopping_product_list_5"><input type="text" value="1"></td>
+            <td class="shopping_product_list_6"><a style="color:#009B72">删除</a></td>
+        </tr>
+        <tr class="shopping_product_list" id="shoppingProduct_05">
+            <td class="shopping_product_list_1">oppoR9</td>
+            <td class="shopping_product_list_2"><label>219</label></td>
+            <td class="shopping_product_list_4">￥<label>2199.00</label></td>
+            <td class="shopping_product_list_5"><input type="text" value="1"></td>
+            <td class="shopping_product_list_6"><a style="color:#009B72">删除</a></td>
+        </tr>
+    </table>
+    <div class="shopping_list_end">
+        <div><a id="removeAllProduct" style="color:#009B72">结算商品</a></div>
+        <ul>
+            <li class="shopping_list_end_1"><input name="" type="image" src="images/shopping_balance.gif"></li>
+            <li class="shopping_list_end_2">￥<label id="product_total"></label></li>
+            <li class="shopping_list_end_3">商品金额总计：</li>
+            <li>可获商品积分：<label class="shopping_list_end_yellow" id="product_integral"></label></li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

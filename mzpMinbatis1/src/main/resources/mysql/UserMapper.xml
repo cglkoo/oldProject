@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.UserMapper">
+ 
+<insert id="addUser" parameterType="com.mybatis.entity.User" useGeneratedKeys="true" keyProperty="uId"> 
+	INSERT INTO t_users (userName,userPwd,userIcon) VALUES (#{uName},#{uPwd},#{uIcon})
+<!-- <selectKey  resultType="int"  keyProperty="uId">  
+             SELECT LAST_INSERT_ID() AS ID  
+     </selectKey>  --> 
+</insert>
+
+
+<delete id="delUser" parameterType="int">
+		delete from t_users where uId=#{uId}
+</delete>
+
+<update id="updateUser" parameterType="com.mybatis.entity.User">
+update t_users set userName=#{uName}, userPwd=#{uPwd}, userIcon=#{uIcon} where uId=#{uId}
+</update>
+
+<resultMap type="com.mybatis.entity.User" id="userMap">
+     <result property="uId" column="uId"/>
+	 <result property="uName" column="userName"/>
+	 <result property="uPwd" column="userPwd"/>
+	 <result property="uIcon" column="userIcon"/>
+</resultMap>
+
+<select id="getAllUser" parameterType="com.mybatis.entity.User" resultMap="userMap">
+select * from t_users  where userName like #{uName} order by uId  Desc  limit  #{start},#{size}
+</select>
+
+
+<select id="getCount" parameterType="String" resultType="long">
+	select count(1) from t_users where userName like #{keyword}
+</select>
+<select id="getUserById" parameterType="int" resultMap="userMap">
+	select * from  t_users  where  uId=#{uId}
+</select> 
+</mapper>

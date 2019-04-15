@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="
+	      http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd 
+		  http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd
+		  http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd
+		  http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd
+		  http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+	  
+		<!-- 配置数据源； -->	 
+	   <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" >
+	   <!-- 设置为close使Spring容器关闭同时数据源能够正常关闭，以免造成连接泄露 -->
+			<!--  mysql: : -->
+			<property name="driverClassName" value="com.mysql.jdbc.Driver" />
+	        <property name="url" value="jdbc:mysql://localhost:3306/bj1701?useUnicode=true&amp;characterEncoding=UTF-8" />
+	        <property name="username" value="cgl" />
+	        <property name="password" value="1210" /> 
+			<!-- oracle:
+	        <property name="driverClassName" value="oracle.jdbc.driver.OracleDriver" />
+	        <property name="url" value="jdbc:oracle:thin:@localhost:1521:orcl" />
+	        <property name="username" value="cgl" />
+	        <property name="password" value="cgl123" />
+	        <property name="defaultReadOnly" value="false" /> -->
+	        
+	        <!-- 设置为只读状态，配置读写分离时，读库可以设置为true 在连接池创建后，会初始化并维护一定数量的数据库安连接，
+	        	 当请求过多时，数据库会动态增加连接数， 当请求过少时，连接池会减少连接数至一个最小空闲值 -->
+	        	 
+	        <property name="initialSize" value="5" /><!-- 在启动连接池初始创建的数据库连接，默认为0 -->
+	        <property name="maxActive" value="30" /><!-- 设置数据库同一时间的最大活跃连接默认为8，负数表示不闲置 -->
+	        <property name="maxIdle" value="4"/><!-- 在连接池空闲时的最大连接数，超过的会被释放，默认为8，负数表示不闲置 -->
+	        <property name="minIdle" value="2" /><!-- 空闲时的最小连接数，低于这个数量会创建新连接，默认为0 -->
+	        <property name="maxWait" value="30000" /><!-- 连接被用完时等待归还的最大等待时间，单位毫秒，超出时间抛异常，默认为无限等待 -->
+	    </bean>
+     
+		<!-- 配置myBatis的sqlSessionFactory: -->   
+		<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean"> 
+			<property name="dataSource" ref="dataSource" /> <!--引入数据源  -->
+		    <property name="mapperLocations" value="classpath*:mysql/*.xml"  /><!-- 加载mybatis的配置文件 -->
+		</bean>  
+		<!--配置sqlsession，引入sqlSessionFactory -->
+		<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate"> 
+			<constructor-arg index="0" ref="sqlSessionFactory" /> 
+		</bean> 
+		
+		<!-- 配置myBatis: 事务 --> 
+		<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+			<property name="dataSource" ref="dataSource" /> 
+		</bean> 
+		
+		   
+		<!-- 配置spring的JdbcTemplate -->
+		<!-- <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		    <property name="dataSource" ref="dataSource"></property>
+		</bean> -->
+		
+	   <!-- 配置spring包扫描路径 -->
+	   <context:component-scan base-package="com.mybatis.dao,com.mybatis.service,com.mybatis.controller"/>
+	   
+	   <!-- 配置springmvc的注解驱动 -->
+	   <mvc:annotation-driven/>
+	   <!-- springmvc视图解释器 -->
+	   <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver" 
+            id="internalResourceViewResolver">
+            <property name="requestContextAttribute" value="rc"/>
+			<property name="prefix" value="/WEB-INF/jsp/" /><!-- 前缀 -->
+			<property name="suffix" value=".jsp" /> <!-- 后缀 -->
+    	</bean>
+    	 
+	 
+	  
+</beans>	  

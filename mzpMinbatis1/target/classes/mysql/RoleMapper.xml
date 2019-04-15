@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.RoleMapper">
+ 
+<insert id="addRole" parameterType="com.mybatis.entity.Role" useGeneratedKeys="true" keyProperty="rId"> 
+	INSERT INTO t_roles (rName) VALUES (#{rName})
+<!-- <selectKey  resultType="int"  keyProperty="rId">  
+             SELECT LAST_INSERT_ID() AS ID  
+     </selectKey>  --> 
+</insert>
+
+
+<delete id="delRole" parameterType="int">
+		delete from t_roles where rId=#{rId}
+</delete>
+
+<update id="updateRole" parameterType="com.mybatis.entity.Role">
+update t_roles set rName=#{rName} where rId=#{rId}
+</update>
+
+<select id="getAllRole"  parameterType="com.mybatis.entity.Role"  resultType="com.mybatis.entity.Role">
+	select * from t_roles where rName like #{rName} order by rId  desc  limit #{start},#{size}
+</select>
+<select id="getCount" parameterType="String" resultType="long">
+	select count(1) from t_roles where rName like #{keyword}
+</select>
+<select id="getRoleById" parameterType="int"  resultType="com.mybatis.entity.Role">
+	select * from  t_roles  where  rId=#{rId}
+</select> 
+
+<select id="getAllRole2" resultType="com.mybatis.entity.Role">
+	select * from t_roles 
+</select>
+
+
+</mapper>

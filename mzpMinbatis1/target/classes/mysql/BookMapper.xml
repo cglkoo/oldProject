@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.BookMapper">
+ 
+<insert id="addBook" parameterType="com.mybatis.entity.Book" useGeneratedKeys="true" keyProperty="bId"> 
+	INSERT INTO book 
+	(bName,bAuthor,bPublisher) VALUES 
+	(#{bName},#{bAuthor},#{bPublisher})
+<!-- <selectKey  resultType="int"  keyProperty="bId">  
+             SELECT LAST_INSERT_ID() AS ID  
+     </selectKey>  --> 
+</insert>
+
+<delete id="delBook" parameterType="int">
+		delete from book where bId=#{bId}
+</delete>
+
+<update id="updateBook" parameterType="com.mybatis.entity.Book">
+update book set bName=#{bName}, bAuthor=#{bAuthor}, bPublisher=#{bPublisher} where bId=#{bId}
+</update>
+
+<select id="getAllBook"  parameterType="com.mybatis.entity.Book" resultType="com.mybatis.entity.Book">
+	select * from book where bName like #{bName} order by bId  limit #{start},#{size}
+</select>
+<select id="getCount" parameterType="String" resultType="long">
+	select count(1) from book where bName like #{keyword}
+</select>
+<select id="getBookById" parameterType="int"  resultType="com.mybatis.entity.Book">
+	select * from  book  where  bId=#{bId}
+</select> 
+</mapper>

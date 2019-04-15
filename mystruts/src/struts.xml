@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+
+	<!-- 常量 -->
+	<constant name="struts.devMode" value="true" />
+	
+	<!--该属性指定需要Struts2处理的请求后缀，该属性的默认值是action，即所有匹配*.action的请求
+	都由Struts 2处理 如果用户需要制定多个请求后缀，则多个后缀之间以英文逗号隔开 ，前提条件是web.xml中
+	需要配置： <url-pattern>/*</url-pattern> -->
+	<constant name="struts.action.extension" value="do,action,"/>
+	
+	<constant name="struts.multipart.saveDir" value="D:/Cgl_Work/JAVA/myStruts/WebContent/upload/" />
+	<constant name="struts.multipart.maxSize" value="104857600"/>
+	<constant name="struts.i18n.encoding" value="UTF-8"/> 
+
+	<package name="user" namespace="/" extends="struts-default" >
+	
+	<!-- <interceptors> -->
+		<!--定义了第一个拦截器 <interceptor name="myTimer" class="com.mzp.interceptor.MinInterceptor"> 
+			</interceptor> -->
+		<!--定义第二个拦截器 <interceptor name="loginInterceptor" class="com.mzp.interceptor.LoginInterceptor"> 
+			</interceptor> -->
+		<!--定义拦截器栈 <interceptor-stack name="myStack"> <interceptor-ref name="defaultStack"/> 
+			<interceptor-ref name="myTimer"/> <interceptor-ref name="loginInterceptor"/> 
+			</interceptor-stack> </interceptors> -->
+		<!-- 定义默认拦截器 <default-interceptor-ref name="myStack"/> -->
+		<!-- 因为包含在默认拦截器内，所以Action中无需再引用拦截器 -->
+	
+	
+		<global-results>
+			<result name="error">/WEB-INF/error/error.jsp</result>
+			<result name="input">/WEB-INF/user/login.jsp</result> 
+		</global-results>
+		
+		<action name="index">
+			<result>/WEB-INF/user/login.jsp</result>
+		</action> 
+		
+		<action name="register">
+			<result name="success">/WEB-INF/user/reg.jsp</result>
+		</action> 
+
+		<action name="reg" class="com.user.action.UserAction" method="reg">
+			<result name="success">/WEB-INF/user/login.jsp</result>
+		</action>
+		
+		<action name="login" class="com.user.action.UserAction" method="login">
+			<result name="success" type="redirectAction">search.action</result>
+		</action>
+		
+		<action name="search" class="com.user.action.UserAction" method="search">
+			<result name="success">/WEB-INF/user/ok.jsp</result>
+		</action>
+		
+		<action name="deleteUser" class="com.user.action.UserAction" method="deleteUser">
+			<result name="success" type="redirectAction">search.action</result>
+		</action> 
+		
+		<action name="updateUser" class="com.user.action.UserAction" method="updateUser">
+			<result name="success">/WEB-INF/user/updateUser.jsp</result>
+		</action> 
+		
+		<action name="updateUserResult" class="com.user.action.UserAction" method="updateUserResult">
+			<result name="success" type="redirectAction">search.action</result>
+		</action>
+		
+		
+	</package>
+	<!--返回一个JSON  -->
+	 <package name="json" namespace="/"  extends="json-default">
+		<action name="checkUserName" class="com.user.action.UserAction" method="checkUserName">
+			<result name="success" type="json"></result>
+		</action>
+	</package>
+	
+	<include file="struts-default"/>
+	<include file="struts-file.xml"/>
+	<include file="struts-role.xml"/>
+	
+
+</struts>    

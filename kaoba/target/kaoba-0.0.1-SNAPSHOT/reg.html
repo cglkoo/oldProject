@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>欢迎注册</title>
+
+ <style type="text/css">
+ .redClass{
+ 	border: 1px red solid;
+ }
+ span{
+ 	color:red;
+ 	font-size: 20px;
+ }
+ </style>
+ 
+<script type="text/javascript" src="myjs/jquery-3.2.1.min.js" ></script>
+ 
+ <script type="text/javascript">
+ 	$(document).ready(function(){
+ 		
+ 		$("#btn").click(function(){
+ 			
+ 			window.location="login.jsp";
+ 		});
+ 		
+ 		$("#sbm").click(function(){
+ 			var u=$("input[name='username']").val();
+ 			u=trimSpace(u);
+ 			var p=$("input[name='pwd']").val();
+ 			p=trimSpace(p);
+ 			if(u==''){
+ 				$("span").text('用户名不能为空！');
+ 				$("input[name='username']").focus();
+ 				$("input[name='username']").addClass("redClass");
+ 			}else if(p==''){
+ 				$("input[name='username']").removeClass("redClass");
+ 				$("span").text('密码不能为空！');
+ 				$("input[name='pwd']").focus();
+ 				$("input[name='pwd']").addClass("redClass");
+ 			}else{
+ 				$("input[name='pwd']").removeClass("redClass");
+ 				document.forms[0].submit();  //提交表单；
+ 			}
+ 			
+ 		});
+ 		
+ 	});
+
+ 	/*去除字符串前后的空格*/
+ 	function trimSpace(str) {
+ 		return str.replace(/(^\s+)|(\s+$)/g, "");
+ 	}
+ 	/*去除字符串中所有空格*/
+ 	function removeAllSpace(str) {
+ 		return str.replace(/\s+/g, "");
+ 	}
+ </script>
+
+</head>
+<body>
+<div align="center"><span></span>
+<form action="reg" method="post" name="lgForm">
+<p>用户：<input  name="username"/></p>
+<p>密码：<input name="pwd" type="password"/></p>
+<p> <input id="sbm" type="button" value="注册"/>  <input id="btn" type="button" value="登录"/></p>
+</form>
+</div>
+</body>
+</html>

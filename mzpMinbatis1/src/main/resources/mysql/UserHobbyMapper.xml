@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.UserHobbyMapper">
+ <insert id="addUserHobby" parameterType="com.mybatis.entity.UserHobby" useGeneratedKeys="true" keyProperty="id"> 
+	INSERT INTO user_hobby (uId,hId) VALUES (#{uId},#{hId})
+<!-- <selectKey  resultType="int"  keyProperty="id">  
+             SELECT LAST_INSERT_ID() AS ID  
+     </selectKey>  --> 
+</insert>
+
+<select id="getUserHobbyListByUId" parameterType="int" resultType="com.mybatis.entity.UserHobby">
+select * from user_hobby where uId=#{uId}
+</select>
+ <delete id="delUserHobby" parameterType="com.mybatis.entity.UserHobby" >
+		delete from user_hobby where uId=#{uId}
+</delete>
+</mapper>

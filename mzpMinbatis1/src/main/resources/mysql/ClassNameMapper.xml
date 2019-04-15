@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ClassNameMapper">
+<!-- 映射文件配置：resultMap -->
+
+<resultMap type="com.mybatis.entity.Clazz" id="myMap">
+	<result property="cId" column="class_id" />
+	<result property="cName" column="class_name"/>
+	<collection property="slist" column="class_id" select="com.StuNameMapper.getStuListBycId" >
+		<result property="stuId" column="stuId"/>
+		<result property="stuName" column="stuName"/>
+		<result property="stuAge" column="stuAge" />
+	</collection>
+	
+</resultMap>
+ <!-- 查询所有解决方案2：返回一个resultMap-->
+ <select id="getAllClassName2" resultMap="myMap">
+ 	select * from t_class
+ </select>
+
+
+<!-- 新增 班级--> 
+<insert id="addClassName" parameterType="com.mybatis.entity.Clazz" useGeneratedKeys="true" keyProperty="cId"> 
+INSERT INTO t_class (class_name) VALUES (#{cName})
+</insert>
+
+ <!-- 查询所有解决方案1：加一个别名  -->
+ <select id="getAllClassName" resultType="com.mybatis.entity.Clazz">
+ 	select class_id cId, class_name cName from t_class
+ </select>
+ 
+ 
+ <!--删除  -->
+ <delete id="delClassName"  parameterType="com.mybatis.entity.Clazz">
+ 	delete from t_class where class_id =#{cId}
+ </delete>
+ 
+ <!-- 用Map当作传入参数；parameterMap -->
+<parameterMap type="com.mybatis.entity.Clazz" id="paraMap">
+	<parameter property="cId" javaType="int"/>
+</parameterMap>
+ 
+  <delete id="delClassName2" parameterMap="paraMap">
+ 	delete from t_class where class_id =#{cId}
+ </delete>
+ 
+</mapper>
