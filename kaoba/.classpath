@@ -33,7 +33,6 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="D:/Program Files/apache-tomcat-8.0.20/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="D:/Program Files/apache-tomcat-8.0.20/lib/servlet-api.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
