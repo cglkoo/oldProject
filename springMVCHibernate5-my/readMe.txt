@@ -1,9 +1,0 @@
-配置Hibernate的步骤：
-1，导入依赖包：pom.xml
-2，web.xml不用动；
-3，修改spring的dataSource配置，增加sessionFactory的配置；
-4，注解实体类；
-5，测试CRUD；
-使用Hibernate注意事项：
-1，主键必须是Id，不能改！！！；
-2，实体类必须提供无参构造方法！！！
