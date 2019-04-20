@@ -1,31 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <!DOCTYPE>
 <html lang="zh-CN">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 <title>文件上传</title>
-<link href="${rc.getContextPath() }/static/css/bootstrap.min.css" rel="stylesheet">
-<script type="text/javascript" src="${rc.getContextPath() }/static/js/jquery-3.2.1.min.js"></script>
-<script type="text/javascript" src="${rc.getContextPath() }/static/js/bootstrap.min.js"></script>
+<link href="${rc.getContextPath() }/static/css/bootstrap.min.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="${rc.getContextPath() }/static/js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript"
+	src="${rc.getContextPath() }/static/js/bootstrap.min.js"></script>
 <!-- fileinput -->
-<link href="${rc.getContextPath() }/static/bootstrap-fileinput/css/fileinput.min.css" rel="stylesheet">
-<script type="text/javascript" src="${rc.getContextPath() }/static/bootstrap-fileinput/js/fileinput.min.js"></script>
-<script type="text/javascript" src="${rc.getContextPath() }/static/bootstrap-fileinput/js/locales/zh.js"></script>
-<script type="text/javascript" src="${rc.getContextPath() }/static/bootstrap-fileinput/themes/explorer/theme.min.js"></script>
+<link
+	href="${rc.getContextPath() }/static/bootstrap-fileinput/css/fileinput.min.css"
+	rel="stylesheet">
+<script type="text/javascript"
+	src="${rc.getContextPath() }/static/bootstrap-fileinput/js/fileinput.min.js"></script>
+<script type="text/javascript"
+	src="${rc.getContextPath() }/static/bootstrap-fileinput/js/locales/zh.js"></script>
+<script type="text/javascript"
+	src="${rc.getContextPath() }/static/bootstrap-fileinput/themes/explorer/theme.min.js"></script>
 <!-- fileinput -->
 </head>
 <body>
 
-	<div class="container" style="margin-top:50px;">
+	<div class="container" style="margin-top: 50px;">
 		<div class="row">
-			<div class="col-md-6" style="height:300px;">
-				<input id="userImg" name="file" type="file" class="file-loading"/>
+			<div class="col-md-6" style="height: 300px;">
+				<input id="userImg" name="file" type="file" class="file-loading" />
 			</div>
 		</div>
 	</div>
 
-<script type="text/javascript">
+	<script type="text/javascript">
 $(function(){
 	 $("#userImg").fileinput({
        language: 'zh',//设置语言
