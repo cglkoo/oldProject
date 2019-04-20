@@ -10,14 +10,6 @@
   <listener>
     <listener-class>com.kaokaoba.listener.CountListener</listener-class>
   </listener>
-  <filter>
-    <filter-name>logFilter</filter-name>
-    <filter-class>com.kaokaoba.filter.LogFilter</filter-class>
-  </filter>
-  <filter-mapping>
-    <filter-name>logFilter</filter-name>
-    <url-pattern>/*</url-pattern>
-  </filter-mapping>
   <servlet>
     <servlet-name>loginServlet</servlet-name>
     <servlet-class>com.kaokaoba.servlet.LoginServlet</servlet-class>
@@ -42,6 +34,16 @@
     <servlet-name>regServlet</servlet-name>
     <url-pattern>/reg</url-pattern>
   </servlet-mapping>
+  
+  <servlet>
+    <servlet-name>reg2Servlet</servlet-name>
+    <servlet-class>com.kaokaoba.servlet.Reg2Servlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>reg2Servlet</servlet-name>
+    <url-pattern>/reg2</url-pattern>
+  </servlet-mapping>
+  
   <servlet>
     <servlet-name>roleServlet</servlet-name>
     <servlet-class>com.kaokaoba.servlet.RoleServlet</servlet-class>
@@ -49,6 +51,14 @@
   <servlet-mapping>
     <servlet-name>roleServlet</servlet-name>
     <url-pattern>/role</url-pattern>
+  </servlet-mapping>
+  <servlet>
+    <servlet-name>fileUploadServlet</servlet-name>
+    <servlet-class>com.kaokaoba.servlet.FileUploadServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>fileUploadServlet</servlet-name>
+    <url-pattern>/fileupload</url-pattern>
   </servlet-mapping>
   <session-config>
     <session-timeout>1</session-timeout>
