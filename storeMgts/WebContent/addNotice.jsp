@@ -1,24 +1,24 @@
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ page language="java" import="com.store.notice.*,java.util.*" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" import="com.store.notice.*,java.util.*"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加通告 </title>
+<title>添加通告</title>
 <style type="text/css">
-table{
+table {
 	border: 1px blue solid;
 	border-collapse: collapse;
 }
 
-td{
+td {
 	border: 1px blue solid;
 	width: 200px;
 }
 </style>
 
-<script type="text/javascript" src="myjs/jquery-3.2.1.min.js" ></script>
+<script type="text/javascript" src="myjs/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
 
@@ -50,16 +50,14 @@ td{
 			});
 		
 	});
-</script> 
+</script>
 
 </head>
 <body>
 
-<div align="center">
-<p>&nbsp;</p>
-<span style="color: red">
- 
-<%
+	<div align="center">
+		<p>&nbsp;</p>
+		<span style="color: red"> <%
 request.setCharacterEncoding("UTF-8");//解决中文乱码的问题；
 String nName=request.getParameter("nName");
 String nContent=request.getParameter("nContent");
@@ -83,20 +81,21 @@ if(null!=nName&&null!=nContent){
 %>
 
 
-</span>
-<form action="addNotice.jsp" name="NoticeForm" method="post">
-<div style="width: 580px;">
-通告标题：&nbsp;&nbsp;<input name="nName"   size="50" /> &nbsp;&nbsp;
-<br/><br/>
-通告内容：&nbsp;&nbsp; <textarea  rows="5" name="nContent" cols="50"></textarea> &nbsp;&nbsp;
-<br/><br/>
-<button>
-&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;并&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button></div>
-</form>
- <p>&nbsp;</p>
+		</span>
+		<form action="addNotice.jsp" name="NoticeForm" method="post">
+			<div style="width: 580px;">
+				通告标题：&nbsp;&nbsp;<input name="nName" size="50" /> &nbsp;&nbsp; <br />
+				<br /> 通告内容：&nbsp;&nbsp;
+				<textarea rows="5" name="nContent" cols="50"></textarea>
+				&nbsp;&nbsp; <br /> <br />
+				<button>
+					&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;并&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+			</div>
+		</form>
+		<p>&nbsp;</p>
 
- 
-</div>
+
+	</div>
 
 </body>
 </html>

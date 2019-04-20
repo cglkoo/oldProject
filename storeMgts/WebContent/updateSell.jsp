@@ -1,24 +1,25 @@
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ page language="java" import="com.store.sell.*,java.util.*" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" import="com.store.sell.*,java.util.*"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>添加通告 </title>
+<title>添加通告</title>
 <style type="text/css">
-table{
+table {
 	border: 1px blue solid;
 	border-collapse: collapse;
 }
-td{
+
+td {
 	border: 1px blue solid;
 	width: 200px;
 	text-align: center;
 }
 </style>
 
-<script type="text/javascript" src="myjs/jquery-3.2.1.min.js" ></script>
+<script type="text/javascript" src="myjs/jquery-3.2.1.min.js"></script>
 
 <script type="text/javascript">
 
@@ -53,16 +54,14 @@ td{
 		});
 		
 	});
-</script> 
+</script>
 
 </head>
 <body>
 
-<div align="center">
-<p>&nbsp;</p>
-<span style="color: red">
-
-	<%
+	<div align="center">
+		<p>&nbsp;</p>
+		<span style="color: red"> <%
 	request.setCharacterEncoding("UTF-8");    //解决中文乱码的问题；
 	String mId=request.getParameter("mId");   //表示从列表的页面链接过来。
 	String mId2=request.getParameter("mId2");   //表示从自己的页面提交过来的。
@@ -117,21 +116,23 @@ td{
 	}
 	%>
 
-</span>
-<form action="updateSell.jsp" name="SellForm" method="post">
-<div style="width: 580px;">
-手机型号：&nbsp;&nbsp;<input name="mTypes" id="type"  value="<%=name %>"  size="20" /> &nbsp;&nbsp;
-<br/><br/>
-手机型号：&nbsp;&nbsp; <input id="num"  name="mNumbers" size="2" value="<%=number %>"> &nbsp;&nbsp;
-<br/><br/><input type="hidden" name="mId2" value="<%=id %>"/>
-<button>
-&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;并&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button></div>
-</form>
- <p>&nbsp;</p>
+		</span>
+		<form action="updateSell.jsp" name="SellForm" method="post">
+			<div style="width: 580px;">
+				手机型号：&nbsp;&nbsp;<input name="mTypes" id="type" value="<%=name %>"
+					size="20" /> &nbsp;&nbsp; <br /> <br /> 手机型号：&nbsp;&nbsp; <input
+					id="num" name="mNumbers" size="2" value="<%=number %>">
+				&nbsp;&nbsp; <br /> <br /> <input type="hidden" name="mId2"
+					value="<%=id %>" />
+				<button>
+					&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;并&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+			</div>
+		</form>
+		<p>&nbsp;</p>
 
 
- 
-</div>
+
+	</div>
 
 </body>
 </html>

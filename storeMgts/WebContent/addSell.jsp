@@ -1,23 +1,24 @@
 <%@page import="java.text.SimpleDateFormat"%>
-<%@ page language="java" import="com.store.sell.*,java.util.*" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" import="com.store.sell.*,java.util.*"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>添加已售手机商品</title>
 <style type="text/css">
-table{
+table {
 	border: 1px blue solid;
 	border-collapse: collapse;
 }
-td{
+
+td {
 	border: 1px blue solid;
 	width: 200px;
 	text-align: center;
 }
 </style>
-<script type="text/javascript" src="myjs/jquery-3.2.1.min.js" ></script>
+<script type="text/javascript" src="myjs/jquery-3.2.1.min.js"></script>
 <script type="text/javascript">
 
 	/*去除字符串前后的空格*/
@@ -48,15 +49,14 @@ td{
 			}
 		});
 	});
-</script> 
+</script>
 
 </head>
 <body>
 
-<div align="center">
-<p>&nbsp;</p>
-<span style="color: red">
-	<%
+	<div align="center">
+		<p>&nbsp;</p>
+		<span style="color: red"> <%
 	request.setCharacterEncoding("UTF-8");//解决中文乱码的问题；
 	String mTypes=request.getParameter("mTypes");
 	String mNumbers=request.getParameter("mNumbers");
@@ -95,16 +95,16 @@ td{
 		out.println("添加手机出售页面：");
 	}
 	%>
-</span>
-<form action="addSell.jsp" name="SellForm" method="post">
-	<div style="width: 580px;">
-	手机型号：&nbsp;&nbsp;<input name="mTypes" size="20" /><br>（手机型号只能是oppoFind9、oppoR9sPlus、oppoR9s、oppoR9Plus、oppoR9） &nbsp;&nbsp;
-	<br/><br/>
-	手机数量：&nbsp;&nbsp;<input name="mNumbers"  size="4">&nbsp;&nbsp;
-	<br/><br/>
-	<button>&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;并&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button></div>
-</form>
-<p>&nbsp;</p>
-</div>
+		</span>
+		<form action="addSell.jsp" name="SellForm" method="post">
+			<div style="width: 580px;">
+				手机型号：&nbsp;&nbsp;<input name="mTypes" size="20" /><br>（手机型号只能是oppoFind9、oppoR9sPlus、oppoR9s、oppoR9Plus、oppoR9）
+				&nbsp;&nbsp; <br /> <br /> 手机数量：&nbsp;&nbsp;<input name="mNumbers"
+					size="4">&nbsp;&nbsp; <br /> <br />
+				<button>&nbsp;&nbsp;&nbsp;&nbsp;提&nbsp;&nbsp;交&nbsp;&nbsp;并&nbsp;&nbsp;保&nbsp;&nbsp;存&nbsp;&nbsp;</button>
+			</div>
+		</form>
+		<p>&nbsp;</p>
+	</div>
 </body>
 </html>
