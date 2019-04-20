@@ -15,7 +15,6 @@ public class Employees {
 	private String entry;
 	
 	public Employees(){
-		
 	}
 	
 	public Employees(int userId, String userName, String userPwd, String sex, String mobile, String borth,
