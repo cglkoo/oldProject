@@ -16,7 +16,7 @@
 	<standard>1.1.2</standard>
 	<hibernate>5.0.4.Final</hibernate>
 	<mysql>5.1.36</mysql>
-	<jackson.version>2.5.4</jackson.version>
+	<jackson.version>2.9.10.8</jackson.version>
 	
   </properties>
   <build>
