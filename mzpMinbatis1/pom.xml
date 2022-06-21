@@ -15,7 +15,7 @@
 	<jstl-api>1.2</jstl-api>
 	<standard>1.1.2</standard>
 	<hibernate>5.0.4.Final</hibernate>
-	<mysql>5.1.36</mysql>
+	<mysql>8.0.28</mysql>
 	<jackson.version>2.5.4</jackson.version>
 	
   </properties>
